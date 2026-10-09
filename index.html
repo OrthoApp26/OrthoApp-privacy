@@ -76,6 +76,12 @@
   #tabText p{margin:0;color:var(--muted)}
   .stage{display:flex;justify-content:center;background:linear-gradient(135deg,var(--teal-l),#fff);border-radius:28px;padding:36px 20px}
   .stage .phone{width:280px;transform:none}
+  /* video */
+  .vid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .vid .phone{width:260px;margin:0 auto;transform:none}
+  .vid video{display:block;width:100%;height:auto;background:#000}
+  .vid ul{margin:16px 0 0;padding-left:20px;color:var(--muted)}
+  .cap{font-size:.82rem;color:var(--muted);margin-top:12px;text-align:center}
   /* steps */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:s}
   .step{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px 26px}
@@ -102,9 +108,13 @@
   .rv.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
   /* responsive */
+  .hero .wrap>*,.show>*,.band>*,.vid>*{min-width:0}
   @media (max-width:900px){
-    .hero .wrap,.show,.band{grid-template-columns:1fr}
-    .phones{min-height:430px}.phone{width:200px}
+    .phones{min-height:0;padding:8px 0 24px}
+    .phones .phone:nth-child(1){display:none}
+    .phones .phone:nth-child(2){transform:none}
+    .hero .wrap,.show,.band,.vid{grid-template-columns:1fr}
+    .phone{width:min(240px,70vw)}
     .grid,.steps{grid-template-columns:1fr}
     .band{padding:32px 24px}
     section{padding:60px 0}
@@ -221,8 +231,28 @@
     </div>
   </section>
 
+  <!-- VIDEO -->
+  <section id="video">
+    <div class="wrap vid">
+      <div class="rv">
+        <span class="eyebrow">See it in action</span>
+        <h2>Measure angles right on the X-ray</h2>
+        <p class="sub" style="margin-bottom:0">Load a radiograph, pick a tool and tap the points. OrthoApp calculates the angle instantly, so you can name it and keep it with the patient.</p>
+        <ul>
+          <li>Distance, 3-point angle and 2-line (Cobb-style) angle</li>
+          <li>Ready-made names such as mLDFA, MPTA, HKA, neck-shaft angle</li>
+          <li>Pinch to zoom, fine-tune each point, save the measurement</li>
+        </ul>
+      </div>
+      <div class="rv">
+        <div class="phone"><video id="demoVid" autoplay muted loop playsinline preload="metadata" poster="img/mldfa-poster.jpg" aria-label="Screen recording: measuring the mLDFA angle on a femur radiograph"><source src="img/mldfa.mp4" type="video/mp4"></video></div>
+        <p class="cap">Screen recording: measuring mLDFA with the 2-line angle tool</p>
+      </div>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS -->
-  <section id="how">
+  <section class="alt" id="how">
     <div class="wrap">
       <div class="rv">
         <span class="eyebrow">How it works</span>
@@ -305,6 +335,9 @@
     const i=tabs.findIndex(t=>t.getAttribute('aria-selected')==='true');
     if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=tabs[(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length];show(n.dataset.k);n.focus()}
   });
+  // video: respect reduced motion
+  const dv=document.getElementById('demoVid');
+  if(dv&&window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){dv.pause();dv.removeAttribute('autoplay');dv.setAttribute('controls','')}
   // reveal on scroll
   const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12}):null;
   document.querySelectorAll('.rv').forEach(el=>io?io.observe(el):el.classList.add('in'));
