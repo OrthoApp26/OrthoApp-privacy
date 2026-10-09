@@ -3,74 +3,316 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OrthoApp Privacy Policy</title>
+<title>OrthoApp – Orthopedic patient management, offline and private</title>
+<meta name="description" content="OrthoApp is an offline-first patient management app for orthopedic surgeons: patient sheets, surgery, clinical scoring, labs, radiology and timelines. Data stays on your device.">
+<meta name="theme-color" content="#0b6e8a">
+<link rel="icon" href="icon.png">
 <style>
-  :root{--bg:#fff;--fg:#1c2430;--muted:#5b6675;--line:#dfe4ea;--accent:#6a2fa0}
-  @media (prefers-color-scheme:dark){:root{--bg:#14181f;--fg:#e6eaf0;--muted:#9aa5b4;--line:#2a313c;--accent:#b58cf0}}
-  body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-  main{max-width:760px;margin:0 auto;padding:32px 16px 64px}
-  h1{font-size:1.8rem;margin:0 0 4px;color:var(--accent)}
-  h2{font-size:1.2rem;margin:32px 0 8px;padding-top:16px;border-top:1px solid var(--line)}
-  p,li{margin:8px 0}
-  .muted{color:var(--muted);font-size:.9rem}
-  a{color:var(--accent)}
+  :root{
+    --teal:#0b6e8a; --teal-d:#08566c; --teal-l:#e3f1f5;
+    --bg:#ffffff; --bg2:#f3f6f8; --text:#1d2a33; --muted:#566673; --line:#d9e2e8;
+    --radius:16px; --shadow:0 10px 30px rgba(11,60,80,.12);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:72px}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:var(--teal)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.25rem;color:var(--teal);text-decoration:none}
+  .logo img{width:34px;height:34px;border-radius:9px}
+  nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;align-items:center}
+  nav a{color:var(--text);text-decoration:none;font-weight:500;font-size:.95rem}
+  nav a:hover{color:var(--teal)}
+  .btn{display:inline-block;background:var(--teal);color:#fff!important;padding:12px 24px;border-radius:999px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font-size:1rem;transition:background .15s,transform .15s}
+  .btn:hover{background:var(--teal-d);transform:translateY(-1px)}
+  .btn.ghost{background:transparent;color:var(--teal)!important;border:2px solid var(--teal)}
+  .btn.ghost:hover{background:var(--teal-l)}
+  .btn.sm{padding:9px 20px;font-size:.92rem}
+  .menu-btn{display:none;background:none;border:0;padding:8px;cursor:pointer}
+  .menu-btn span{display:block;width:24px;height:2px;background:var(--text);margin:5px 0;transition:.2s}
+  /* hero */
+  .hero{background:linear-gradient(180deg,var(--teal-l),#fff 85%);padding:64px 0 40px;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  .pill{display:inline-block;max-width:100%;line-height:1.4;border-radius:14px;background:#fff;color:var(--teal);border:1px solid #b9d9e2;border-radius:999px;padding:5px 14px;font-size:.85rem;font-weight:600;margin-bottom:18px}
+  h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.12;margin:0 0 18px;letter-spacing:-.02em}
+  h1 span{color:var(--teal)}
+  .lead{font-size:1.15rem;color:var(--muted);max-width:34em;margin:0 0 28px}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .note{font-size:.85rem;color:var(--muted);margin-top:14px}
+  .phones{position:relative;display:flex;justify-content:center;gap:0;min-height:520px}
+  .phone{width:250px;border-radius:34px;border:9px solid #14212b;background:#14212b;box-shadow:var(--shadow);overflow:hidden;position:relative}
+  .phone img{width:100%;height:auto}
+  .phones .phone:nth-child(1){transform:rotate(-5deg) translate(28px,28px);z-index:1}
+  .phones .phone:nth-child(2){transform:rotate(4deg) translate(-28px,-6px);z-index:2}
+  /* trust strip */
+  .strip{border-block:1px solid var(--line);background:#fff}
+  .strip .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-block:18px;color:var(--muted);font-weight:500;font-size:.95rem}
+  .strip b{color:var(--teal)}
+  /* sections */
+  section{padding:80px 0}
+  .alt{background:var(--bg2)}
+  .eyebrow{color:var(--teal);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.8rem}
+  h2{font-size:clamp(1.7rem,3vw,2.4rem);margin:6px 0 12px;letter-spacing:-.01em;line-height:1.2}
+  .sub{color:var(--muted);max-width:40em;margin:0 0 40px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:box-shadow .2s,transform .2s}
+  .card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+  .ico{width:48px;height:48px;border-radius:12px;background:var(--teal-l);color:var(--teal);display:grid;place-items:center;margin-bottom:16px}
+  .ico svg{width:26px;height:26px}
+  .card h3{margin:0 0 8px;font-size:1.15rem}
+  .card p{margin:0;color:var(--muted)}
+  .card ul{margin:10px 0 0;padding-left:18px;color:var(--muted)}
+  /* showcase */
+  .show{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 18px}
+  .tab{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:999px;padding:8px 16px;font-weight:600;font-size:.92rem;cursor:pointer;font-family:inherit}
+  .tab[aria-selected=true]{background:var(--teal);border-color:var(--teal);color:#fff}
+  .tab:focus-visible,.btn:focus-visible,a:focus-visible{outline:3px solid #7cc4d8;outline-offset:2px}
+  #tabText h3{margin:0 0 6px}
+  #tabText p{margin:0;color:var(--muted)}
+  .stage{display:flex;justify-content:center;background:linear-gradient(135deg,var(--teal-l),#fff);border-radius:28px;padding:36px 20px}
+  .stage .phone{width:280px;transform:none}
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:s}
+  .step{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px 26px}
+  .step::before{counter-increment:s;content:counter(s);position:absolute;top:-18px;left:24px;width:38px;height:38px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:700}
+  .step h3{margin:6px 0 6px}.step p{margin:0;color:var(--muted)}
+  /* privacy band */
+  .band{background:var(--teal);color:#fff;border-radius:28px;padding:48px;display:grid;grid-template-columns:1.3fr .7fr;gap:30px;align-items:center}
+  .band h2{margin-top:0}
+  .band p{color:#d5ebf1;margin:0 0 18px}
+  .band .btn{background:#fff;color:var(--teal)!important}
+  .band .btn:hover{background:var(--teal-l)}
+  .band ul{list-style:none;margin:0;padding:0}
+  .band li{padding:8px 0 8px 30px;position:relative}
+  .band li::before{content:"✓";position:absolute;left:0;font-weight:700}
+  /* contact + footer */
+  .contact{text-align:center}
+  .contact .sub{margin-inline:auto}
+  footer{background:#10252f;color:#b7c8d0;padding:40px 0 28px;font-size:.92rem}
+  footer a{color:#e6f3f7;text-decoration:none}footer a:hover{text-decoration:underline}
+  .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
+  .disc{margin-top:24px;padding-top:20px;border-top:1px solid #27414d;font-size:.82rem;color:#8fa6b0}
+  /* reveal */
+  .rv{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+  /* responsive */
+  @media (max-width:900px){
+    .hero .wrap,.show,.band{grid-template-columns:1fr}
+    .phones{min-height:430px}.phone{width:200px}
+    .grid,.steps{grid-template-columns:1fr}
+    .band{padding:32px 24px}
+    section{padding:60px 0}
+    .menu-btn{display:block}
+    nav ul{position:absolute;left:0;right:0;top:64px;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;gap:0;padding:8px 20px 16px;display:none}
+    nav ul.open{display:flex}
+    nav li{width:100%;padding:10px 0}
+    nav .btn{display:block;text-align:center}
+  }
 </style>
 </head>
 <body>
-<main>
-<h1>OrthoApp Privacy Policy</h1>
-<p class="muted">Effective date: 10 October 2026 &middot; Last updated: 10 October 2026</p>
 
-<p>OrthoApp ("the app") is an orthopedic patient-recording, radiology-measurement, scoring and laboratory-tracking tool for medical professionals. The app is published by Bassem Ehab Abdelbarey Ghoneim ("we", "us"). This policy explains what information the app handles and what we do, and do not do, with it.</p>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top"><img src="icon.png" alt="" width="34" height="34">OrthoApp</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <nav aria-label="Main">
+      <ul id="menu">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="btn sm" href="#download">Download / Get started</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-<h2>1. The short version</h2>
-<ul>
-  <li>OrthoApp works offline. The information you enter stays on your own device.</li>
-  <li>We do not run servers that receive your data. We cannot see, read, copy or sell your patient records.</li>
-  <li>The app has no advertising, no analytics and no tracking.</li>
-  <li>You are in control of your data: you can export it, back it up, and delete it at any time.</li>
-</ul>
+<main id="top">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <span class="pill">Built by an orthopedic surgeon, for orthopedic surgeons</span>
+        <h1>Streamlined <span>orthopedic patient management</span></h1>
+        <p class="lead">Record patients, surgeries, scores, labs and radiographs in one fast, organized app. Everything is stored on your own device: private by design and fully usable without internet.</p>
+        <div class="cta">
+          <a class="btn" href="#download">Get started</a>
+          <a class="btn ghost" href="#features">Explore features</a>
+        </div>
+        <p class="note">Android · Works offline · No account needed</p>
+      </div>
+      <div class="phones" aria-label="OrthoApp screenshots">
+        <div class="phone"><img src="img/list.webp" alt="OrthoApp patient list" width="390" height="780"></div>
+        <div class="phone"><img src="img/demo.webp" alt="OrthoApp patient demographics tab" width="390" height="780"></div>
+      </div>
+    </div>
+  </div>
 
-<h2>2. Information you enter into the app</h2>
-<p>Depending on how you use it, you may enter patient details (such as name, medical record number, age, sex, diagnosis, notes), visit records, scoring results, laboratory results and photographs of laboratory reports, and radiographs or other images used for measurements. This is sensitive health information.</p>
-<p>All of it is stored only in the private storage of the app on your device (an on-device database). It is not uploaded to us or to any third party by the app.</p>
+  <div class="strip">
+    <div class="wrap">
+      <span><b>Offline-first</b> · no internet needed</span>
+      <span><b>On-device storage</b> · data never leaves your phone</span>
+      <span><b>No ads · no tracking</b></span>
+      <span><b>PDF &amp; CSV</b> export · encrypted backup</span>
+    </div>
+  </div>
 
-<h2>3. Information we collect</h2>
-<p>We do not collect personal information through the app. We do not ask you to create an account, and we do not collect your name, email address, location, contacts or device identifiers.</p>
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="wrap">
+      <div class="rv">
+        <span class="eyebrow">Features</span>
+        <h2>Everything an orthopedic practice records, in one place</h2>
+        <p class="sub">Designed around the way surgeons actually follow patients, from first visit to long-term follow-up.</p>
+      </div>
+      <div class="grid">
+        <article class="card rv">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></div>
+          <h3>Comprehensive patient profiles</h3>
+          <p>Track demographics, comorbidities and the full course of each patient in clearly organized tabs, so nothing gets lost between visits.</p>
+        </article>
+        <article class="card rv">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l7 7-4 4-7-7z"/><path d="M10 7L3 14l4 4 7-7"/><path d="M3 21l4-4"/></svg></div>
+          <h3>Specialized orthopedic tracking</h3>
+          <p>Dedicated sections for Surgery, Clinical evaluation with validated scoring systems and classifications, Labs, and Radiology.</p>
+          <ul><li>Surgery, implants, complications and revisions</li><li>Scores and classifications for follow-up visits</li><li>Laboratory panels with trends</li></ul>
+        </article>
+        <article class="card rv">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+          <h3>Secure and offline-first</h3>
+          <p>Built on local storage (IndexedDB), so patient data stays on your device. There is no server to breach, no account to create, and it works in the operating theatre or the clinic with no signal.</p>
+        </article>
+        <article class="card rv">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
+          <h3>Advanced data management</h3>
+          <p>Store radiographs with the patient, export a complete patient sheet to PDF, and back up everything with a single file. Restore on a new phone, optionally with password-protected AES-256 encryption.</p>
+          <ul><li>Radiographs and report photos saved on-device</li><li>PDF patient sheets · CSV data exports</li><li>Backup and restore in one file</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
 
-<h2>4. Backups and exports you create</h2>
-<p>The app lets you save backup files, PDF reports and data exports to your device or share them through other apps you choose (for example email or cloud storage). These files are created only when you ask for them, and where they go is your decision. Once a file leaves the app, it is under the control of the app or service you sent it to, and our policy no longer applies to it.</p>
-<p>Backup files can be protected with a password (AES-256 encryption). We cannot recover a lost password, and we cannot decrypt your backups.</p>
+  <!-- SHOWCASE -->
+  <section class="alt" id="showcase">
+    <div class="wrap show">
+      <div class="rv">
+        <span class="eyebrow">Interface</span>
+        <h2>Fast, familiar and made for one-handed use</h2>
+        <p class="sub" style="margin-bottom:0">Move through a patient file with seamless tab navigation. Tap a tab to preview it.</p>
+        <div class="tabs" role="tablist" aria-label="Patient file tabs">
+          <button class="tab" role="tab" aria-selected="true" data-k="demo">Demographics</button>
+          <button class="tab" role="tab" aria-selected="false" data-k="surgery">Surgery</button>
+          <button class="tab" role="tab" aria-selected="false" data-k="clinical">Clinical evaluation</button>
+          <button class="tab" role="tab" aria-selected="false" data-k="labs">Labs</button>
+          <button class="tab" role="tab" aria-selected="false" data-k="radiology">Radiology</button>
+          <button class="tab" role="tab" aria-selected="false" data-k="timeline">Timeline</button>
+        </div>
+        <div id="tabText" aria-live="polite"></div>
+      </div>
+      <div class="stage rv">
+        <div class="phone"><img id="stageImg" src="img/demo.webp" alt="OrthoApp Demographics tab" width="390" height="780"></div>
+      </div>
+    </div>
+  </section>
 
-<h2>5. Purchases</h2>
-<p>The free version can be upgraded to OrthoApp Pro through a subscription. Purchases are handled entirely by Google Play. Google processes your payment and shares with us only the information needed to confirm that your subscription is active. We never see or store your card details. Google's own privacy policy applies to purchases: <a href="https://policies.google.com/privacy">policies.google.com/privacy</a>.</p>
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="rv">
+        <span class="eyebrow">How it works</span>
+        <h2>Up and running in minutes</h2>
+        <p class="sub">No sign-up, no setup, no internet connection required.</p>
+      </div>
+      <div class="steps">
+        <div class="step rv"><h3>Install the app</h3><p>Download OrthoApp from Google Play and open it. Everything is ready straight away.</p></div>
+        <div class="step rv"><h3>Add patients and records</h3><p>Create a patient sheet, then record surgery, scores, labs and radiographs as you go.</p></div>
+        <div class="step rv"><h3>Export and back up</h3><p>Create a PDF patient sheet or a CSV export, and save a backup file whenever you like.</p></div>
+      </div>
+    </div>
+  </section>
 
-<h2>6. Links to other websites</h2>
-<p>Some scoring tools contain links to external reference websites (for example AO Foundation and OrthoToolkit). They open in your browser and are operated by others. No patient data is sent when you open them. Please read their own privacy policies.</p>
+  <!-- PRIVACY BAND + DOWNLOAD -->
+  <section class="alt" id="download">
+    <div class="wrap">
+      <div class="band rv">
+        <div>
+          <h2>Your patients' data stays with you</h2>
+          <p>OrthoApp has no cloud, no accounts and no analytics. Information is stored in the app on your device, and you decide when to export or back it up.</p>
+          <a class="btn" id="playBtn" href="#contact">Coming soon on Google Play</a>
+          <p style="margin:14px 0 0;font-size:.85rem">Want early access? <a href="mailto:orthoapp26@gmail.com?subject=OrthoApp%20early%20access" style="color:#fff">Email us</a>.</p>
+        </div>
+        <ul>
+          <li>Works fully offline</li>
+          <li>No ads, no tracking</li>
+          <li>Encrypted backups (optional)</li>
+          <li>Read our <a href="privacy.html" style="color:#fff">privacy policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-<h2>7. Permissions</h2>
-<p>The app only asks for access that you trigger yourself, such as choosing an image file or saving and sharing a file. It does not read your contacts, location, microphone, or messages.</p>
-
-<h2>8. How we protect data</h2>
-<p>Data stays in the app's private storage on your device and is protected by your device's own security. The app disables Android's automatic cloud backup of its data, so its contents are not copied to Google Drive without your action. You are responsible for keeping your device secure (screen lock, device encryption, updates) and for keeping your backup files safe.</p>
-
-<h2>9. Your responsibilities for patient data</h2>
-<p>If you record real patients' information, you are the person responsible for it under the laws and professional rules that apply to you (for example patient confidentiality, informed consent and data-protection laws such as Egypt's Personal Data Protection Law No. 151 of 2020, the EU GDPR, or HIPAA where relevant). Please obtain any required consent, and remove or anonymize identifying details when you export data for research or sharing. The app is a tool; it does not make you compliant by itself.</p>
-
-<h2>10. Retention and deletion</h2>
-<p>Your data stays on your device until you delete it. You can delete individual patients and records inside the app. Uninstalling the app, or clearing its storage in Android settings, permanently removes all of its data from the device. Because we do not hold copies, we cannot restore deleted data. Make a backup before deleting or changing phones.</p>
-
-<h2>11. Children</h2>
-<p>OrthoApp is a professional tool for medical practitioners and is not directed at children. We do not knowingly collect information from children.</p>
-
-<h2>12. Medical disclaimer</h2>
-<p>OrthoApp is a reference and record-keeping aid. It does not diagnose, treat or replace professional clinical judgment. Always verify measurements, scores and classifications before making clinical decisions.</p>
-
-<h2>13. Changes to this policy</h2>
-<p>If we change this policy (for example if a future version adds online features), we will update the date above and describe the change in the app or the Google Play listing before it takes effect.</p>
-
-<h2>14. Contact</h2>
-<p>Questions or requests about this policy: <a href="mailto:orthoapp26@gmail.com">orthoapp26@gmail.com</a></p>
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap rv">
+      <span class="eyebrow">Contact</span>
+      <h2>Questions, feedback or feature requests?</h2>
+      <p class="sub">We are building OrthoApp with surgeons. Tell us what would make it better for your practice.</p>
+      <a class="btn" href="mailto:orthoapp26@gmail.com">orthoapp26@gmail.com</a>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>© <span id="yr">2026</span> OrthoApp. All rights reserved.</div>
+      <div><a href="privacy.html">Privacy policy</a> &nbsp;·&nbsp; <a href="mailto:orthoapp26@gmail.com">orthoapp26@gmail.com</a></div>
+    </div>
+    <p class="disc">OrthoApp is a record-keeping and reference aid. It does not diagnose or treat, and it does not replace professional clinical judgment. Always verify measurements, scores and classifications. You are responsible for protecting patient information and complying with the laws and consent requirements that apply to you.</p>
+  </div>
+</footer>
+
+<script>
+  // mobile menu
+  const mb=document.getElementById('menuBtn'), menu=document.getElementById('menu');
+  mb.addEventListener('click',()=>{const o=menu.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+  menu.addEventListener('click',e=>{if(e.target.tagName==='A'){menu.classList.remove('open');mb.setAttribute('aria-expanded','false')}});
+
+  // UI showcase tabs
+  const INFO={
+    demo:['Demographics','Identification, age, sex, diagnosis, date of surgery, comorbidities and research subgroups: the fast starting point for every patient.','Demographics'],
+    surgery:['Surgery','Procedure, implant or device, and complications and revisions, with dates and details.','Surgery'],
+    clinical:['Clinical evaluation','Visits with validated scoring systems and classifications, so progress is measured the same way every time.','Clinical evaluation'],
+    labs:['Labs','Enter pre-operative, infection, bone and other panels, flag abnormal values, follow trends and attach photos of lab reports.','Labs'],
+    radiology:['Radiology','Keep radiographs with the patient and measure on them. Images are saved on the device.','Radiology'],
+    timeline:['Timeline','A chronological view of the patient’s surgeries, visits and results in one place.','Timeline']
+  };
+  const tabs=[...document.querySelectorAll('.tab')], img=document.getElementById('stageImg'), txt=document.getElementById('tabText');
+  function show(k){
+    tabs.forEach(t=>t.setAttribute('aria-selected',t.dataset.k===k));
+    img.src='img/'+k+'.webp'; img.alt='OrthoApp '+INFO[k][2]+' tab';
+    txt.innerHTML='<h3></h3><p></p>'; txt.firstChild.textContent=INFO[k][0]; txt.lastChild.textContent=INFO[k][1];
+  }
+  tabs.forEach(t=>t.addEventListener('click',()=>show(t.dataset.k))); show('demo');
+  // keep keyboard support for arrows
+  document.querySelector('.tabs').addEventListener('keydown',e=>{
+    const i=tabs.findIndex(t=>t.getAttribute('aria-selected')==='true');
+    if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=tabs[(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length];show(n.dataset.k);n.focus()}
+  });
+  // reveal on scroll
+  const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12}):null;
+  document.querySelectorAll('.rv').forEach(el=>io?io.observe(el):el.classList.add('in'));
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // When the app is live, set the Play Store link here:
+  const PLAY_URL=''; // e.g. 'https://play.google.com/store/apps/details?id=com.orthoapp.app'
+  if(PLAY_URL){const b=document.getElementById('playBtn');b.href=PLAY_URL;b.textContent='Get it on Google Play'}
+</script>
 </body>
 </html>
